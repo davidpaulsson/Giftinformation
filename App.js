@@ -23,37 +23,34 @@ export default class App extends React.Component {
   keyExtractor = (item, index) => item.id;
   render() {
     return (
-      <View style={styles.wrapper}>
-        <SectionList
-          keyExtractor={this.keyExtractor}
-          renderItem={({ item }) => (
-            <View style={styles.listItem}>
-              <Text>{item.name}</Text>
-            </View>
-          )}
-          renderSectionHeader={({ section }) => (
-            <View style={styles.listHeader}>
-              <Text>{section.title}</Text>
-            </View>
-          )}
-          sections={this.state.dataSource}
-        />
-      </View>
+      <SectionList
+        keyExtractor={this.keyExtractor}
+        renderItem={({ item }) => (
+          <View style={styles.listItem}>
+            <Text>{item.name}</Text>
+          </View>
+        )}
+        renderSectionHeader={({ section }) => (
+          <View style={styles.listHeader}>
+            <Text>{section.title}</Text>
+          </View>
+        )}
+        sections={this.state.dataSource}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    padding: 16,
-  },
   listHeader: {
     paddingTop: 16,
+    marginHorizontal: 16,
     backgroundColor: 'white',
   },
   listItem: {
     backgroundColor: colors.white,
     marginTop: StyleSheet.hairlineWidth,
+    marginHorizontal: 16,
     paddingVertical: 16,
     paddingHorizontal: 8,
   },
