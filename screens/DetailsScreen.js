@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import HTMLView from 'react-native-htmlview';
 
 export default class DetailsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -14,8 +15,17 @@ export default class DetailsScreen extends React.Component {
     const description = params ? params.description : null;
     return (
       <View style={{ flex: 1, padding: 16 }}>
-        <Text style={{ fontWeight: '700', marginBottom: 16, fontSize: 17 }}>{name}</Text>
-        <Text>{description}</Text>
+        {name && (
+          <Text style={{ fontWeight: '700', marginBottom: 16, fontSize: 17 }}>
+            {name}
+          </Text>
+        )}
+        {description && (
+          <HTMLView
+            value={description}
+            // stylesheet={styles}
+          />
+        )}
       </View>
     );
   }
