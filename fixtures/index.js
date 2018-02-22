@@ -6,17 +6,21 @@ const uuidv4 = require('uuid/v4');
 
 moment().locale('sv');
 
+const clean = str => str ? str.toString().replace('\n ', ' ').replace('\n', '').trim() : null
+
 const fetchDetails = async url => {
   try {
     const res = await got(`https://giftinformation.se${url}`);
     const $ = cheerio.load(res.body);
-    const description = $('.article-bd').html();
-    // .find('p')
-    // .map((i, el) => $(el).text())
-    // .get()
-    // .join('\n\n');
+
     return {
-      description,
+      description: clean($('.article-bd').html()),
+      inCaseOf: {
+        ingestion: clean($('#Fortaring').find('.t-rte').html()),
+        eyeSplash: clean($('#Ogonstank').find('.t-rte').html()),
+        skinContact: clean($('#Hudkontakt').find('.t-rte').html()),
+        inhalation: clean($('#Inandning').find('.t-rte').html()),
+      },
       url: `https://giftinformation.se${url}`,
       published: moment(
         $('.block-related')
