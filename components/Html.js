@@ -18,7 +18,7 @@ export default class Html extends React.Component {
         bullet={'• '}
         addLineBreaks={false}
         onLinkPress={(url) => {
-          const poison = poisons.find(p => p.url.includes(url));
+          const poison = poisons.find(p => p.url.endsWith(url));
           this.props.navigation.navigate('Details', { ...poison })
         }}
       />
