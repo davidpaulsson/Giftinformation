@@ -9,6 +9,7 @@ import {
 import _ from 'lodash';
 import colors from '../utils/colors';
 import json from '../fixtures/data.json';
+import { human } from 'react-native-typography'
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ';
 export default class HomeScreen extends React.Component {
@@ -42,13 +43,13 @@ export default class HomeScreen extends React.Component {
               }}
             >
               <View style={styles.listItem}>
-                <Text>{item.name}</Text>
+                <Text style={human.body}>{item.name}</Text>
               </View>
             </TouchableOpacity>
           )}
           renderSectionHeader={({ section }) => (
             <View style={styles.listHeader}>
-              <Text>{section.title}</Text>
+              <Text style={human.body}>{section.title}</Text>
             </View>
           )}
           sections={this.state.dataSource}

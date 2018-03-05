@@ -6,7 +6,13 @@ const uuidv4 = require('uuid/v4');
 
 moment().locale('sv');
 
-const clean = str => str ? str.toString().replace('\n ', ' ').replace('\n', '').trim() : null
+const clean = str =>
+  str
+    ? str
+        .toString()
+        .replace(/(\r\n|\n|\r)/gm, '')
+        .trim()
+    : null;
 
 const fetchDetails = async url => {
   try {
@@ -16,10 +22,26 @@ const fetchDetails = async url => {
     return {
       description: clean($('.article-bd').html()),
       inCaseOf: {
-        ingestion: clean($('#Fortaring').find('.t-rte').html()),
-        eyeSplash: clean($('#Ogonstank').find('.t-rte').html()),
-        skinContact: clean($('#Hudkontakt').find('.t-rte').html()),
-        inhalation: clean($('#Inandning').find('.t-rte').html()),
+        ingestion: clean(
+          $('#Fortaring')
+            .find('.t-rte')
+            .html()
+        ),
+        eyeSplash: clean(
+          $('#Ogonstank')
+            .find('.t-rte')
+            .html()
+        ),
+        skinContact: clean(
+          $('#Hudkontakt')
+            .find('.t-rte')
+            .html()
+        ),
+        inhalation: clean(
+          $('#Inandning')
+            .find('.t-rte')
+            .html()
+        ),
       },
       url: `https://giftinformation.se${url}`,
       published: moment(

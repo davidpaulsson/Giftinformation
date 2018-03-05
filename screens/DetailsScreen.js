@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import HTMLView from 'react-native-htmlview';
+import { human } from 'react-native-typography';
+import Html from '../components/Html';
 
 export default class DetailsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -11,22 +13,45 @@ export default class DetailsScreen extends React.Component {
   };
   render() {
     const { params } = this.props.navigation.state;
-    const name = params ? params.name : null;
-    const description = params ? params.description : null;
+    if (!params) {
+      <Text>Loading</Text>;
+    }
+    const {
+      name,
+      description,
+      inCaseOf: { ingestion, eyeSplash, skinContact, inhalation },
+    } = params;
     return (
-      <View style={{ flex: 1, padding: 16 }}>
+      <ScrollView style={{ flex: 1, padding: 16 }}>
         {name && (
-          <Text style={{ fontWeight: '700', marginBottom: 16, fontSize: 17 }}>
-            {name}
-          </Text>
+          <Text style={[human.title1, { marginBottom: 8 }]}>{name}</Text>
         )}
-        {description && (
-          <HTMLView
-            value={description}
-            // stylesheet={styles}
-          />
+        {description && <Html value={description} {...this.props} />}
+        {ingestion && (
+          <View>
+            <Text style={[human.title2, { marginBottom: 8 }]}>Vid förtäring</Text>
+            <Html value={ingestion} {...this.props} />
+          </View>
         )}
-      </View>
+        {eyeSplash && (
+          <View>
+            <Text style={[human.title2, { marginBottom: 8 }]}>Vid ögonstänk</Text>
+            <Html value={eyeSplash} {...this.props} />
+          </View>
+        )}
+        {skinContact && (
+          <View>
+            <Text style={[human.title2, { marginBottom: 8 }]}>Vid hudkontakt</Text>
+            <Html value={skinContact} {...this.props} />
+          </View>
+        )}
+        {inhalation && (
+          <View>
+            <Text style={[human.title2, { marginBottom: 8 }]}>Vid inandning</Text>
+            <Html value={inhalation} {...this.props} />
+          </View>
+        )}
+      </ScrollView>
     );
   }
 }

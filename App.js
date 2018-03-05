@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import HomeScreen from './screens/HomeScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import colors from './utils/colors';
+import { human } from 'react-native-typography'
 
 ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT_UP);
 
@@ -26,9 +27,7 @@ export default StackNavigator(
         borderBottomColor: colors.sunflowerYellow,
       },
       headerTintColor: colors.greyishBrown,
-      headerTitleStyle: {
-        fontWeight: 'normal',
-      },
+      headerTitleStyle: human.headline,
     },
   }
 );
