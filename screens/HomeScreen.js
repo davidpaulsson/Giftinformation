@@ -1,31 +1,26 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  SectionList,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, View, SectionList, TouchableOpacity } from 'react-native';
 import _ from 'lodash';
 import colors from '../utils/colors';
 import json from '../fixtures/data.json';
-import { human } from 'react-native-typography'
+import { human } from 'react-native-typography';
+import { Text, ListItem } from 'native-base';
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ';
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Home',
+    title: 'Giftinformation',
   };
   state = {
     dataSource: _.compact(
-      [...alphabet].map(letter => {
-        const data = json.filter(d => d.name.toUpperCase().startsWith(letter));
+      [...alphabet].map(title => {
+        const data = json.filter(d => d.name.toUpperCase().startsWith(title));
         if (data.length === 0) {
           return false;
         }
         return {
           data,
-          title: letter,
+          title,
         };
       })
     ),
@@ -37,20 +32,18 @@ export default class HomeScreen extends React.Component {
         <SectionList
           keyExtractor={this.keyExtractor}
           renderItem={({ item }) => (
-            <TouchableOpacity
+            <ListItem
               onPress={() => {
                 this.props.navigation.navigate('Details', { ...item });
               }}
             >
-              <View style={styles.listItem}>
-                <Text style={human.body}>{item.name}</Text>
-              </View>
-            </TouchableOpacity>
+              <Text style={human.body}>{item.name}</Text>
+            </ListItem>
           )}
           renderSectionHeader={({ section }) => (
-            <View style={styles.listHeader}>
+            <ListItem itemDivider>
               <Text style={human.body}>{section.title}</Text>
-            </View>
+            </ListItem>
           )}
           sections={this.state.dataSource}
         />
@@ -62,17 +55,5 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: 'white',
-  },
-  listHeader: {
-    paddingTop: 16,
-    marginHorizontal: 16,
-    backgroundColor: 'white',
-  },
-  listItem: {
-    backgroundColor: colors.white,
-    marginTop: StyleSheet.hairlineWidth,
-    marginHorizontal: 16,
-    paddingVertical: 16,
-    paddingHorizontal: 8,
   },
 });

@@ -27,7 +27,6 @@ export default StackNavigator(
         borderBottomColor: colors.sunflowerYellow,
       },
       headerTintColor: colors.greyishBrown,
-      headerTitleStyle: human.headline,
     },
   }
 );

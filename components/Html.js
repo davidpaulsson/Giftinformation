@@ -10,16 +10,16 @@ export default class Html extends React.Component {
         value={this.props.value}
         stylesheet={{
           p: [human.body, { marginBottom: 16 }],
-          h2: [human.title2, { marginBottom: 8 }],
-          h3: human.title2,
-          h4: human.title2,
+          h2: { fontSize: 21, marginBottom: 8 },
+          h3: { fontSize: 21 },
+          h4: { fontSize: 21 },
           li: human.body,
         }}
         bullet={'• '}
         addLineBreaks={false}
-        onLinkPress={(url) => {
+        onLinkPress={url => {
           const poison = poisons.find(p => p.url.endsWith(url));
-          this.props.navigation.navigate('Details', { ...poison })
+          this.props.navigation.navigate('Details', { ...poison });
         }}
       />
     );
