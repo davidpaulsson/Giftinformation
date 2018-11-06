@@ -19,7 +19,7 @@ export default class Html extends React.Component {
         addLineBreaks={false}
         onLinkPress={url => {
           const poison = poisons.find(p => p.url.endsWith(url));
-          this.props.navigation.navigate('Details', { ...poison });
+          this.props.navigation.push('Details', { ...poison });
         }}
       />
     );
