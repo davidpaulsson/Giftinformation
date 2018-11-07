@@ -1,5 +1,10 @@
 {
   "expo": {
-    "sdkVersion": "31.0.0"
+    "sdkVersion": "31.0.0",
+    "name": "giftinformation",
+    "slug": "giftinformation",
+    "version": "0.1.0",
+    "description": "\"Råd vid förgiftningstillbud\" as an app.",
+    "githubUrl": "https://github.com/davidpaulsson/Giftinformation"
   }
 }
